@@ -26,10 +26,10 @@ export default function Home() {
     });
 
     const data = await response.json();
-    console.log(data);
+    console.log('data', data);
     setWaiting(false);
     setHasResponse(true);
-    setOptimizedPrompt(data.result.prompt);
+    setOptimizedPrompt(data.optimizedPrompt);
   };
 
   return (
@@ -64,7 +64,7 @@ export default function Home() {
         Optimize
         </button>
         {waiting && <TypeAnimation
-            sequence={['optimizing..........................................................................................................................................................', 0]}
+            sequence={['optimizing...........................................................................................................................................................................................................................................................................................................................................................................................', 0]}
             wrapper="span"
             repeat={0}
             cursor={true}
@@ -72,7 +72,7 @@ export default function Home() {
         {hasResponse && <div>
             Optimized prompt: {" "}
             <TypeAnimation
-              sequence={[prompt, 0]}
+              sequence={[optimizedPrompt, 0]}
               wrapper="span"
               repeat={0}
               cursor={true}

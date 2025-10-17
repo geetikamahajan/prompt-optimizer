@@ -9,23 +9,14 @@ export async function POST(request: Request) {
   const response = await client.chat.completions.create({
     model: 'gpt-5',
     messages: [
-      { role: 'system', content: 'Shorten the given prompt without changing intent or quality. Return only JSON: prompt, originalPromptTokens, optimizedPromptTokens.' },
-      { role: 'user', content: prompt },
+      { role: 'system', content: 'Shorten the given prompt without changing intent or quality. Return only JSON: optimizedPrompt, originalPromptTokens, optimizedPromptTokens.' },
+      { role: 'user', content: "This is the prompt: \"" + prompt + "\"" },
     ],
   });
-  console.log(response);
-  
-  return new Response(JSON.stringify({ result: response.choices[0].message.content }), {
+  console.log('func', response);
+  const cleanedContent = response.choices[0].message?.content?.replaceAll("\n", "").trim() || "";
+  const optimizedPrompt = cleanedContent ? JSON.parse(cleanedContent).optimizedPrompt : "Prompt optimization failed. Please try again.";
+  return new Response(JSON.stringify({ optimizedPrompt: optimizedPrompt }), {
     headers: { 'Content-Type': 'application/json' },
   });
-};
-
-export async function handleClick() {
-  const response = await client.responses.create({
-    model: 'gpt-4o',
-    instructions: 'You are a coding assistant that talks like a pirate',
-    input: 'Are semicolons optional in JavaScript?',
-  });
-
-  console.log(response.output_text);
 };
