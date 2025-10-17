@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { TypeAnimation } from 'react-type-animation';
 
@@ -10,7 +10,7 @@ export default function Home() {
   const [hasResponse, setHasResponse] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
-  const handleChangeInPromptInput = (event) => {
+  const handleChangeInPromptInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(event.target.value);
   };
 
