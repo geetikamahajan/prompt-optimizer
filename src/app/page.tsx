@@ -10,7 +10,7 @@ export default function Home() {
   const [hasResponse, setHasResponse] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
-  const handleChangeInPromptInput = (event: any) => {
+  const handleChangeInPromptInput = (event) => {
     setPrompt(event.target.value);
   };
 
